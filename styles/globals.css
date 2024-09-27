@@ -1,0 +1,54 @@
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+
+#softwaretimeline .height-fullyear{
+    height: 366rem!important;
+}
+#softwaretimeline #backdropevent{
+    position: absolute; transition: opacity 0.5s ease-in-out 0.5s, top 0.5s ease, height 0.5s ease;
+}
+
+#softwaretimeline #dayrowattention{
+    position: absolute;width:95%; height:1.2rem; background: linear-gradient(to right, rgba(var(--bs-primary-rgb), 0.5), rgba(var(--bs-primary-rgb), 0));
+}
+
+[day-row], [day-row]>*{
+    height: 1rem!important;
+}
+
+[group]{
+    width:0.8rem;
+    margin-right:0.2rem;
+}
+
+[id^="event-"]{
+    width: 0.8rem;
+    position: absolute;
+    margin-top:0.25rem;
+    transition: opacity 0.5s ease-in-out;
+    transform: none !important;
+}
+#backdropevent{
+    position: absolute; 
+    transition: opacity 0.5s ease-in-out 0.5s, top 0.5s ease, height 0.5s ease;
+}
+#leftCol *:not(.popover,.popover *){
+    width: 0.8rem;
+    margin-right:0.2rem;
+}
+#rightCol *:not(.popover,.popover *){
+    width: 0.8rem;
+    margin-left:0.2rem;
+}
+#rightColLabel .card {
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+#rightColLabel .card:hover{
+    z-index:99999!important;
+    transform: scale(105%);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px !important;
+    transform: translateY(-10px);
+    background-image: linear-gradient(to right top, #ffffff, #fdfbff, #fbf7ff, #fbf3ff, #fceeff, #fceeff, #fceeff, #fceeff, #fbf3ff, #fbf7ff, #fdfbff, #ffffff);
+}
