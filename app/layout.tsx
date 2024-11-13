@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
 import clsx from "clsx";
-import Script from 'next/script';
 import "@/styles/globals.css";
 import "@/styles/core.css";
 import "@/styles/theme-default.css";
@@ -42,7 +41,7 @@ export default function RootLayout({
             </div>
           </div>
         </div>
-        <Script src="/softtimecheck.js" strategy="afterInteractive" />
+        <script src="/softtimecheck.js" defer />
       </body>
     </html>
   );
