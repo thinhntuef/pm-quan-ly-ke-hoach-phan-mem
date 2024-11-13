@@ -59,6 +59,7 @@ const ITevents = [
 
 
 $(document).ready(function () {
+  console.log("ready!");
   const taskingYear = 2024;
   const startDate = new Date(taskingYear, 8, 1);
   const endDate = new Date(taskingYear + 1, 7, 31);

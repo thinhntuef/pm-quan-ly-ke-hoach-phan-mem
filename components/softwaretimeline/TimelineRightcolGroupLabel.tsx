@@ -28,8 +28,14 @@ const groupEvents = (events: EventProps[]): { [key: string]: EventProps[] } => {
 
         groupMap[event.start].push(event);
     }
+    const sortedGroupMap: { [key: string]: EventProps[] } = {};
+    Object.keys(groupMap)
+        .sort((a, b) => new Date(a.split("/").reverse().join("-")).getTime() - new Date(b.split("/").reverse().join("-")).getTime()) // Sắp xếp key theo ngày
+        .forEach(key => {
+            sortedGroupMap[key] = groupMap[key];
+        });
 
-    return groupMap;
+    return sortedGroupMap;
 };
 
 const TimelineRightcolGroupLabel: React.FC<{ events: EventProps[], startDate: Date }> = ({ events, startDate }) => {
@@ -38,7 +44,6 @@ const TimelineRightcolGroupLabel: React.FC<{ events: EventProps[], startDate: Da
     const [updatedEvent, setUpdatedEvent] = useState<EventProps | null>(null);
 
     const groups = groupEvents(events);
-
     const handleCardClick = (event: EventProps) => {
         setSelectedEvent(event);
         setUpdatedEvent({ ...event });
@@ -112,6 +117,9 @@ const TimelineRightcolGroupLabel: React.FC<{ events: EventProps[], startDate: Da
     // const distinctEventTypes: string[] = Array.from(new Set(eventTypes));
 
 
+    // const sortedGroupKeys = Object.keys(groups).sort(
+    //     (a, b) => new Date(a.split("/").reverse().join("-")).getTime() - new Date(b.split("/").reverse().join("-")).getTime()
+    // );
     Object.keys(groups).forEach((groupKey, groupIndex) => {
         const group = groups[groupKey];
         const groupDivs: JSX.Element[] = [];
@@ -129,22 +137,24 @@ const TimelineRightcolGroupLabel: React.FC<{ events: EventProps[], startDate: Da
                         <span className="mt-n1 small text-info"><i className="bx bx-time-five text-info"></i> {event.end}</span>
                     </div>
                     <div className="card-body p-0 pb-1">
-                        <span className="mb-0 small">{event.event}</span>
+                        <p className="mb-0 small" style={{ fontSize: '.8rem', lineHeight: '1' }}>{event.event}</p>
                     </div>
                 </div>
             );
         });
 
+        // Xác định vị trí `top` ban đầu của `row` hiện tại
+        const groupPosition = getDaysBetween(new Date(groupKey.split("/").reverse().join("-")), startDate);
+    
         result.push(
             <div
                 className="row"
                 key={groupIndex}
                 style={{
-                    top: `${getDaysBetween(new Date(groupKey.split("/").reverse().join("-")), startDate)}rem`,
+                    top: `${groupPosition}rem`,
                     position: "absolute",
                 }}
-            >
-                {groupDivs}
+            >{groupDivs}
             </div>
         );
     });

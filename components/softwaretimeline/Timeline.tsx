@@ -65,6 +65,10 @@ const Timeline: React.FC<SchoolYearProps> = ({ schoolYear }) => {
       }
     };
   
+    const dayrowattention = document.getElementById('dayrowattention');
+    if (dayrowattention) {
+      (dayrowattention as HTMLElement).style.top = `${countDaysBetween(new Date(), startDate)}rem`;
+    }
     fetchData();
   }, []);
   
@@ -74,7 +78,7 @@ const Timeline: React.FC<SchoolYearProps> = ({ schoolYear }) => {
     <div className="w-100" id="softwaretimeline">
       <div className="w-100 height-fullyear" id="dayrowlayer">
         <div className="w-100 bg-label-secondary d-flex opacity-50 rounded" id="backdropevent"></div>
-        <div className="d-flex opacity-50 rounded mt-n2" id="dayrowattention" style={{ top: `${countDaysBetween(new Date(), startDate)}rem` }}></div>
+        <div className="d-flex opacity-50 rounded mt-n2" id="dayrowattention"></div>
       </div>
 
       {/* Timeline structure */}
@@ -91,7 +95,7 @@ const Timeline: React.FC<SchoolYearProps> = ({ schoolYear }) => {
         <div className="height-fullyear d-flex" id="rightCol">
           <TimelineLeftcolGroup events={ITevents} startDate={startDate} />
         </div>
-        <div className="height-fullyear d-flex ms-3 w-auto" id="rightColLabel">
+        <div className="height-fullyear d-flex ms-3 col" id="rightColLabel">
           <TimelineRightcolGroupLabel events={ITevents} startDate={startDate} />
         </div>
       </div>
